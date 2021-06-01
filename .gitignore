@@ -1,0 +1,17 @@
+/.idea
+/pix2pix/checkpoints
+/midas/model-f46da743.pt
+/midas/model.pt
+/structuredrl/model.pth.tar
+/results
+/result
+/__pycache__
+*/*.pyc
+*/**/*.pyc
+*/**/**/*.pyc
+*/**/**/**/*.pyc
+*/**/**/**/**/*.pyc
+*/*.so*
+*/**/*.so*
+*/**/*.dylib*
+*/**/__pycache__
