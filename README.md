@@ -9,6 +9,16 @@ S. Mahdi H. Miangoleh, Sebastian Dille, Long Mai, Sylvain Paris, Yağız Aksoy.
 
 ![Teaserimage](http://yaksoy.github.io/images/hrdepthTeaser.jpg)
 
+
+
+### Change log:
+
+* [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available  [June 2021] 
+* Merge net training dataset generation [instructions](./dataset_prepare/mergenet_dataset_prepare.md) is now available. [June 2021] 
+* bug fix [June 2021]
+
+
+
 ## Setup
 
 We Provided the implementation of our method using [MiDas-v2][1] and [SGRnet][2] as the base.
@@ -72,7 +82,8 @@ Fill in the needed variables in the following matlab file and run:
 
 
 ### Training
-Merge model training dataset will be released soon...
+
+Navigate to [dataset preparation instructions](./dataset_prepare/mergenet_dataset_prepare.md) to download and prepare the training dataset. 
 
 ```sh
 python ./pix2pix/train.py --dataroot DATASETDIR --name mergemodeltrain --model pix2pix4depth --no_flip --no_dropout
@@ -82,7 +93,7 @@ python ./pix2pix/test.py --dataroot DATASETDIR --name mergemodeleval --model pix
 ```
 
 
-### Citation
+## Citation
 
 This implementation is provided for academic use only. Please cite our paper if you use this code or any of the models.
 ```
@@ -94,12 +105,13 @@ year={2021},
 }
 ```
 
-### Credits
+## Credits
 
 The "Merge model" code skeleton (./pix2pix folder) was adapted from the [pytorch-CycleGAN-and-pix2pix][3] repository. 
 
 For MiDaS and SGR inferences we used the scripts and models from [MiDas-v2][1] and [SGRnet][2] respectively (./midas and ./structuredrl folders). 
 
+Thanks to [k-washi](https://github.com/k-washi) for providing us with a Google Colaboratory notebook implementation.
 
 [1]: https://github.com/intel-isl/MiDaS/tree/v2
 [2]: https://github.com/KexianHust/Structure-Guided-Ranking-Loss
