@@ -3,6 +3,7 @@
 /midas/model-f46da743.pt
 /midas/model.pt
 /structuredrl/model.pth.tar
+dataset_prepare/midas/model.pt
 /results
 /result
 /__pycache__
