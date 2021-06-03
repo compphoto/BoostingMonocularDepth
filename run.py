@@ -110,7 +110,11 @@ def run(dataset, option):
                                         option.pix2pixsize, option.depthNet)
         if option.R0 or option.R20:
             path = os.path.join(result_dir, images.name)
-            midas.utils.write_depth(path, whole_estimate, bits=2)
+            if option.output_resolution == 1:
+                midas.utils.write_depth(path, cv2.resize(whole_estimate, (input_resolution[1], input_resolution[0]),
+                                                         interpolation=cv2.INTER_CUBIC), bits=2)
+            else:
+                midas.utils.write_depth(path, whole_estimate, bits=2)
             continue
 
         # Output double estimation if required
@@ -123,16 +127,10 @@ def run(dataset, option):
             else:
                 midas.utils.write_depth(path, whole_estimate, bits=2)
 
-        # Ensures that the image is not up-scaled more than scale_threshold before the local refinement process starts.
-        if 2*whole_image_optimal_size > scale_threshold*max(img.shape[:2]):
-            whole_image_optimal_size = int(scale_threshold*max(img.shape[:2])/4)
-
-        threshold_temp = min(whole_size_threshold, scale_threshold*max(img.shape[:2]))
-
         # Compute the multiplier described in section 6 of the main paper to make sure our initial patch can select
         # small high-density regions of the image.
         global factor
-        factor = max(min(1, 4 * patch_scale * whole_image_optimal_size / threshold_temp), 0.2)
+        factor = max(min(1, 4 * patch_scale * whole_image_optimal_size / whole_size_threshold), 0.2)
         print('Adjust factor is:', 1/factor)
 
         # Compute the target resolution.
@@ -143,7 +141,7 @@ def run(dataset, option):
             a = round(2*whole_image_optimal_size*img.shape[0]/img.shape[1])
             b = 2*whole_image_optimal_size
 
-        img = cv2.resize(img, (int(b/factor), int(a/factor)), interpolation=cv2.INTER_CUBIC)
+        img = cv2.resize(img, (round(b/factor), round(a/factor)), interpolation=cv2.INTER_CUBIC)
 
         base_size = option.net_receptive_field_size*2
 
@@ -163,8 +161,8 @@ def run(dataset, option):
             mergein_scale = 1
 
         imageandpatchs = ImageandPatchs(option.data_dir, images.name, patchset, img, mergein_scale)
-        whole_estimate_resized = cv2.resize(whole_estimate, (int(img.shape[1]*mergein_scale),
-                                            int(img.shape[0]*mergein_scale)), interpolation=cv2.INTER_CUBIC)
+        whole_estimate_resized = cv2.resize(whole_estimate, (round(img.shape[1]*mergein_scale),
+                                            round(img.shape[0]*mergein_scale)), interpolation=cv2.INTER_CUBIC)
         imageandpatchs.set_base_estimate(whole_estimate_resized.copy())
         imageandpatchs.set_updated_estimate(whole_estimate_resized.copy())
 
@@ -220,7 +218,7 @@ def run(dataset, option):
             p_coef = np.polyfit(mapped.reshape(-1), patch_whole_estimate_base.reshape(-1), deg=1)
             merged = np.polyval(p_coef, mapped.reshape(-1)).reshape(mapped.shape)
 
-            merged = cv2.resize(merged, org_size, interpolation=cv2.INTER_CUBIC)
+            merged = cv2.resize(merged, (org_size[1],org_size[0]), interpolation=cv2.INTER_CUBIC)
 
             # Get patch size and location
             w1 = rect[0]
@@ -231,7 +229,7 @@ def run(dataset, option):
             # To speed up the implementation, we only generate the Gaussian mask once with a sufficiently large size
             # and resize it to our needed size while merging the patches.
             if mask.shape != org_size:
-                mask = cv2.resize(mask_org, org_size, interpolation=cv2.INTER_LINEAR)
+                mask = cv2.resize(mask_org, (org_size[1],org_size[0]), interpolation=cv2.INTER_LINEAR)
 
             tobemergedto = imageandpatchs.estimation_updated_image
 
@@ -362,10 +360,7 @@ def doubleestimate(img, size1, size2, pix2pixsize, net_type):
                 torch.max(prediction_mapped) - torch.min(prediction_mapped))
     prediction_mapped = prediction_mapped.squeeze().cpu().numpy()
 
-    # Resize back to input resolution
-    prediction_end_res = cv2.resize(prediction_mapped, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_CUBIC)
-
-    return prediction_end_res
+    return prediction_mapped
 
 
 # Generate a single-input depth estimation

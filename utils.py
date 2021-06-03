@@ -153,20 +153,15 @@ class Images:
 
 
 class ImageandPatchs:
-    def __init__(self, root_dir, name, patchsinfo, rgb_image=None, scale=1):
+    def __init__(self, root_dir, name, patchsinfo, rgb_image, scale=1):
         self.root_dir = root_dir
         self.patchsinfo = patchsinfo
         self.name = name
         self.patchs = patchsinfo
         self.scale = scale
 
-        if rgb_image is None:
-            rgb_image_dir = os.path.join(root_dir, 'wholeimage', 'rgb', self.name)
-            self.rgb_image = read_image(rgb_image_dir)
-        else:
-            self.rgb_image = rgb_image
-            self.rgb_image = cv2.resize(rgb_image, (int(rgb_image.shape[1]*scale),
-                                        int(rgb_image.shape[0]*scale)), interpolation=cv2.INTER_CUBIC)
+        self.rgb_image = cv2.resize(rgb_image, (round(rgb_image.shape[1]*scale), round(rgb_image.shape[0]*scale)),
+                                    interpolation=cv2.INTER_CUBIC)
 
         self.do_have_estimate = False
         self.estimation_updated_image = None
@@ -190,9 +185,10 @@ class ImageandPatchs:
         rect = np.array(self.patchs[index][1]['rect'])
         msize = self.patchs[index][1]['size']
 
-        rect = rect * self.scale
+        ## applying scale to rect:
+        rect = np.round(rect * self.scale)
         rect = rect.astype('int')
-        msize = int(msize * self.scale)
+        msize = round(msize * self.scale)
 
         patch_rgb = impatch(self.rgb_image, rect)
         if self.do_have_estimate:
