@@ -42,10 +42,13 @@ GPU_threshold = 1600 - 32 # Limit for the GPU (NVIDIA RTX 2080), can be adjusted
 scale_threshold = 3  # Allows up-scaling with a scale up to 3
 
 opt = TestOptions().parse()
+opt.gpu_ids = []
 global pix2pixmodel
 pix2pixmodel = Pix2Pix4DepthModel(opt)
 pix2pixmodel.save_dir = './pix2pix/checkpoints/mergemodel'
 pix2pixmodel.load_networks('latest')
+pix2pixmodel.netG.to(device)
+pix2pixmodel.device = device
 pix2pixmodel.eval()
 
 midas_model_path = "midas/model.pt"
