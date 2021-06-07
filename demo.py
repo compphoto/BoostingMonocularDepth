@@ -34,8 +34,10 @@ gdown.download(url, output, quiet=False)
 
 #
 # select device
-device = torch.device("cuda")
+device = torch.device("cpu")
 print("device: %s" % device)
+
+print("nvidia:", torch.cuda.device_count())
 
 whole_size_threshold = 3000  # R_max from the paper
 GPU_threshold = 1600 - 32 # Limit for the GPU (NVIDIA RTX 2080), can be adjusted
