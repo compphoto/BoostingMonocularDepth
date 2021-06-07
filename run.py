@@ -112,9 +112,10 @@ def run(dataset, option):
             path = os.path.join(result_dir, images.name)
             if option.output_resolution == 1:
                 midas.utils.write_depth(path, cv2.resize(whole_estimate, (input_resolution[1], input_resolution[0]),
-                                                         interpolation=cv2.INTER_CUBIC), bits=2)
+                                                         interpolation=cv2.INTER_CUBIC),
+                                        bits=2, colored=option.colorize_results)
             else:
-                midas.utils.write_depth(path, whole_estimate, bits=2)
+                midas.utils.write_depth(path, whole_estimate, bits=2, colored=option.colorize_results)
             continue
 
         # Output double estimation if required
@@ -123,9 +124,10 @@ def run(dataset, option):
             if option.output_resolution == 1:
                 midas.utils.write_depth(path,
                                         cv2.resize(whole_estimate, (input_resolution[1], input_resolution[0]),
-                                                   interpolation=cv2.INTER_CUBIC), bits=2)
+                                                   interpolation=cv2.INTER_CUBIC), bits=2,
+                                        colored=option.colorize_results)
             else:
-                midas.utils.write_depth(path, whole_estimate, bits=2)
+                midas.utils.write_depth(path, whole_estimate, bits=2, colored=option.colorize_results)
 
         # Compute the multiplier described in section 6 of the main paper to make sure our initial patch can select
         # small high-density regions of the image.
@@ -189,9 +191,8 @@ def run(dataset, option):
             # Output patch estimation if required
             if option.savepatchs:
                 path = os.path.join(patchped_est_outputpath, imageandpatchs.name + '_{:04}'.format(patch_id))
-                midas.utils.write_depth(path, patch_estimation, bits=2)
+                midas.utils.write_depth(path, patch_estimation, bits=2, colored=option.colorize_results)
 
-            
             patch_estimation = cv2.resize(patch_estimation, (option.pix2pixsize, option.pix2pixsize),
                                           interpolation=cv2.INTER_CUBIC)
 
@@ -245,9 +246,9 @@ def run(dataset, option):
             midas.utils.write_depth(path,
                                     cv2.resize(imageandpatchs.estimation_updated_image,
                                                (input_resolution[1], input_resolution[0]),
-                                               interpolation=cv2.INTER_CUBIC), bits=2)
+                                               interpolation=cv2.INTER_CUBIC), bits=2, colored=option.colorize_results)
         else:
-            midas.utils.write_depth(path, imageandpatchs.estimation_updated_image, bits=2)
+            midas.utils.write_depth(path, imageandpatchs.estimation_updated_image, bits=2, colored=option.colorize_results)
 
     print("finished")
 
@@ -459,6 +460,7 @@ if __name__ == "__main__":
     parser.add_argument('--pix2pixsize', type=int, default=1024, required=False)  # Do not change it
     parser.add_argument('--depthNet', type=int, default=0, required=False,
                         help='use to select different base depth networks 0:midas 1:strurturedRL')
+    parser.add_argument('--colorize_results', action='store_true')
     parser.add_argument('--R0', action='store_true')
     parser.add_argument('--R20', action='store_true')
     parser.add_argument('--Final', action='store_true')

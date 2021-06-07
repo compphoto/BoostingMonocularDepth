@@ -70,6 +70,7 @@ class BaseOptions():
         parser.add_argument('--R0', action='store_true')
         parser.add_argument('--R20', action='store_true')
         parser.add_argument('--Final', action='store_true')
+        parser.add_argument('--colorize_results', action='store_true')
 
         self.initialized = True
         return parser
