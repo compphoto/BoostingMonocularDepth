@@ -13,9 +13,9 @@ S. Mahdi H. Miangoleh, Sebastian Dille, Long Mai, Sylvain Paris, Yağız Aksoy.
 
 ### Change log:
 
-* [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available  [June 2021] 
+* [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available.  [June 2021] 
 * Merge net training dataset generation [instructions](./dataset_prepare/mergenet_dataset_prepare.md) is now available. [June 2021] 
-* bug fix [June 2021]
+* Bug fix. [June 2021]
 
 
 
