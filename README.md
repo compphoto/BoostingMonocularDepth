@@ -70,6 +70,12 @@ python run.py --R0 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthN
 python run.py --R20 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0or1]
 ```
 
+To generate the results with *CV.INFERNO* colormap use **--colorize_results** like the sample below:
+
+```python
+python run.py --colorize_results --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0or1]
+```
+
 ### Evaluation
 Fill in the needed variables in the following matlab file and run:
 >./evaluation/evaluatedataset.m
