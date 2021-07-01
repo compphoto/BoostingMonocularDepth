@@ -11,7 +11,7 @@ S. Mahdi H. Miangoleh, Sebastian Dille, Long Mai, Sylvain Paris, Yağız Aksoy.
 
 ## Setup
 
-We Provided the implementation of our method using [MiDas-v2][1] and [SGRnet][2] as the base.
+We Provided the implementation of our method using [MiDas-v2][1], [LeReS][2] and [SGRnet][3] as the base.
 
 ### Environments
 Our mergenet model is trained using torch 0.4.1 and python 3.6 and is tested with torch<=1.8.
@@ -19,7 +19,7 @@ Our mergenet model is trained using torch 0.4.1 and python 3.6 and is tested wit
 Download our mergenet model weights from [here](https://sfu.ca/~yagiz/CVPR21/latest_net_G.pth) and put it in 
 > .\pix2pix\checkpoints\mergemodel\latest_net_G.pth
 
-To use [MiDas-v2][1] as base:
+To use [MiDas-v2][1] or [LeReS][2] as base:
 Install dependancies as following:
 ```sh
 conda install pytorch torchvision opencv cudatoolkit=10.2 -c pytorch
@@ -27,7 +27,7 @@ conda install matplotlib
 conda install scipy
 conda install scikit-image
 ```
-Download the model weights from [MiDas-v2][1] and put it in 
+For MiDaS-v2, download the model weights from [MiDas-v2][1] and put it in 
 > ./midas/model.pt
 
 ```sh
@@ -35,7 +35,15 @@ activate the environment
 python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 0
 ```
 
-To use [SGRnet][2] as base:
+For LeReS, download the model weights from [LeReS][2] and put it in root:
+> ./res101.pth
+
+```sh
+activate the environment
+python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 2
+```
+
+To use [SGRnet][3] as base:
 Install dependancies as following:
 ```sh
 conda install pytorch=0.4.1 cuda92 -c pytorch
@@ -44,8 +52,8 @@ conda install matplotlib
 conda install scikit-image
 pip install opencv-python
 ```
-Follow the official [SGRnet][2] repository to compile the syncbn module in ./structuredrl/models/syncbn.
-Download the model weights from [SGRnet][2] and put it in 
+Follow the official [SGRnet][3] repository to compile the syncbn module in ./structuredrl/models/syncbn.
+Download the model weights from [SGRnet][3] and put it in 
 > ./structuredrl/model.pth.tar
 
 ```sh
@@ -56,8 +64,8 @@ python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --dep
 Different input arguments can be used to generate R0 and R20 results as discussed in the paper. 
 
 ```python
-python run.py --R0 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0or1]
-python run.py --R20 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0or1]
+python run.py --R0 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0,1 or 2]
+python run.py --R20 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0,1 or 2]
 ```
 
 ### Evaluation
@@ -96,12 +104,13 @@ year={2021},
 
 ### Credits
 
-The "Merge model" code skeleton (./pix2pix folder) was adapted from the [pytorch-CycleGAN-and-pix2pix][3] repository. 
+The "Merge model" code skeleton (./pix2pix folder) was adapted from the [pytorch-CycleGAN-and-pix2pix][4] repository. 
 
-For MiDaS and SGR inferences we used the scripts and models from [MiDas-v2][1] and [SGRnet][2] respectively (./midas and ./structuredrl folders). 
+For MiDaS, LeReS and SGR inferences we used the scripts and models from [MiDas-v2][1], [LeReS][2] and [SGRnet][3] respectively (./midas, ./lib and ./structuredrl folders). 
 
 
 [1]: https://github.com/intel-isl/MiDaS/tree/v2
-[2]: https://github.com/KexianHust/Structure-Guided-Ranking-Loss
-[3]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
+[2]: https://github.com/aim-uofa/AdelaiDepth/tree/main/LeReS
+[3]: https://github.com/KexianHust/Structure-Guided-Ranking-Loss
+[4]: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix
 

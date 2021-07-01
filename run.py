@@ -11,6 +11,10 @@ import midas.utils
 from midas.models.midas_net import MidasNet
 from midas.models.transforms import Resize, NormalizeImage, PrepareForNet
 
+#AdelaiDepth
+from lib.multi_depth_model_woauxi import RelDepthModel
+from lib.net_tools import strip_prefix_if_present
+
 # PIX2PIX : MERGE NET
 from pix2pix.options.test_options import TestOptions
 from pix2pix.models.pix2pix4depth_model import Pix2Pix4DepthModel
@@ -61,6 +65,16 @@ def run(dataset, option):
         checkpoint = torch.load('structuredrl/model.pth.tar')
         srlnet.load_state_dict(checkpoint['state_dict'])
         srlnet.eval()
+    elif option.depthNet == 2: 
+        leres_model_path = "res101.pth"
+        checkpoint = torch.load(leres_model_path)
+        leresmodel = RelDepthModel(backbone='resnext101')
+        leresmodel.load_state_dict(strip_prefix_if_present(checkpoint['depth_model'], "module."),
+                                    strict=True)
+        del checkpoint
+        torch.cuda.empty_cache()
+        leresmodel.to(device)
+        leresmodel.eval()
 
     # Generating required directories
     result_dir = option.output_dir
@@ -378,6 +392,8 @@ def singleestimate(img, msize, net_type):
         return estimatemidas(img, msize)
     elif net_type == 1:
         return estimatesrl(img, msize)
+    elif net_type == 2:
+        return estimateleres(img, msize)
 
 
 # Inference on SGRNet
@@ -447,6 +463,42 @@ def estimatemidas(img, msize):
     return prediction
 
 
+def scale_torch(img):
+    """
+    Scale the image and output it in torch.tensor.
+    :param img: input rgb is in shape [H, W, C], input depth/disp is in shape [H, W]
+    :param scale: the scale factor. float
+    :return: img. [C, H, W]
+    """
+    if len(img.shape) == 2:
+        img = img[np.newaxis, :, :]
+    if img.shape[2] == 3:
+        transform = transforms.Compose([transforms.ToTensor(),
+		                                transforms.Normalize((0.485, 0.456, 0.406) , (0.229, 0.224, 0.225) )])
+        img = transform(img.astype(np.float32))
+    else:
+        img = img.astype(np.float32)
+        img = torch.from_numpy(img)
+    return img
+
+# Inference on LeRes
+def estimateleres(img, msize):
+    # LeReS forward pass script adapted from https://github.com/aim-uofa/AdelaiDepth/tree/main/LeReS
+
+    rgb_c = img[:, :, ::-1].copy()
+    A_resize = cv2.resize(rgb_c, (msize, msize))
+    img_torch = scale_torch(A_resize)[None, :, :, :]
+
+    # Forward pass
+    with torch.no_grad():
+        prediction = leresmodel.inference(img_torch)
+
+    prediction = prediction.squeeze().cpu().numpy()
+    prediction = cv2.resize(prediction, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_CUBIC)
+
+    return prediction
+
+
 if __name__ == "__main__":
     # Adding necessary input arguments
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -487,8 +539,11 @@ if __name__ == "__main__":
     elif option_.depthNet == 1:
         option_.net_receptive_field_size = 448
         option_.patch_netsize = 2*option_.net_receptive_field_size
+    elif option_.depthNet == 2:
+        option_.net_receptive_field_size = 448
+        option_.patch_netsize = 2 * option_.net_receptive_field_size
     else:
-        assert False, 'depthNet can only be 0,1'
+        assert False, 'depthNet can only be 0,1 or 2'
 
     # Create dataset from input images
     dataset_ = ImageDataset(option_.data_dir, 'test')
