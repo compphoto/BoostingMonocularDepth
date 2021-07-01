@@ -120,7 +120,7 @@ def calculateprocessingres(img, basesize, confidence=0.1, scale_threshold=3, who
             outputsize_scale = p_size
 
     grad_region = cv2.dilate(grad_resized, kernel2, iterations=1)
-    patch_scale = (1-grad_region).mean()
+    patch_scale = grad_region.mean()
 
     return int(outputsize_scale*speed_scale), patch_scale
 
