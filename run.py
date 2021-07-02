@@ -43,7 +43,7 @@ def run(dataset, option):
     opt = TestOptions().parse()
     global pix2pixmodel
     pix2pixmodel = Pix2Pix4DepthModel(opt)
-    pix2pixmodel.save_dir = './pix2pix/checkpoints/mergemodel'
+    pix2pixmodel.save_dir = './pix2pix/checkpoint/mergemodel'
     pix2pixmodel.load_networks('latest')
     pix2pixmodel.eval()
 
