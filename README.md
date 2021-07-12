@@ -79,11 +79,19 @@ We train an image-to-image translation network to merge the low-resolution depth
 Note that R20 is *bounded by the smoothest regions* in the image, while there are image patches that could support a higher resolution.
 We choose candidate patches by tiling the image and discarding all patches without useful details (step1). The leftover patches are expanded until their edge density matches that of the image(step2). Finally, we merge a double estimation for each patch onto our R20 results and generate our final results (step3).
 
+
 Step 1: Tile and discard
+
 ![patchselection](./figures/patchselection.gif)
+
+
 Step 2: Expand
+
 ![Patchexpand](./figures/patchexpand.gif) 
+
+
 Step 3: Merge
+
 ![Patchexpand](./figures/patchmerge.gif) 
 
 ## Setup
