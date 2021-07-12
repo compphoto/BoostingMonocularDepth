@@ -36,6 +36,7 @@ print("device: %s" % device)
 pix2pixmodel = None
 midasmodel = None
 srlnet = None
+leresmodel = None
 factor = None
 whole_size_threshold = 3000  # R_max from the paper
 GPU_threshold = 1600 - 32 # Limit for the GPU (NVIDIA RTX 2080), can be adjusted 
@@ -65,7 +66,8 @@ def run(dataset, option):
         checkpoint = torch.load('structuredrl/model.pth.tar')
         srlnet.load_state_dict(checkpoint['state_dict'])
         srlnet.eval()
-    elif option.depthNet == 2: 
+    elif option.depthNet == 2:
+        global leresmodel
         leres_model_path = "res101.pth"
         checkpoint = torch.load(leres_model_path)
         leresmodel = RelDepthModel(backbone='resnext101')
