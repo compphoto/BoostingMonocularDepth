@@ -17,10 +17,12 @@ Try our model easily on Colab : [![Open In Colab](https://colab.research.google.
 
 ### Change log:
 
-* A Quick overview of the method is now presented in README.md. [June 2021]
+- Our method implementation using [LeReS][2] is now available. [July 2021]
+
+* A Quick overview of the method is now presented in README.md. [July 2021]
 * [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available.  [June 2021]   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/compphoto/BoostingMonocularDepth/blob/main/Boostmonoculardepth.ipynb)
 * Merge net training dataset generation [instructions](./dataset_prepare/mergenet_dataset_prepare.md) is now available. [June 2021] 
-* Bug fix. [June 2021]
+* Bug fix. [June 2021, July 2021]
 
 
 
@@ -156,7 +158,7 @@ python run.py --R20 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depth
 To generate the results with *CV.INFERNO* colormap use **--colorize_results** like the sample below:
 
 ```python
-python run.py --colorize_results --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0or1]
+python run.py --colorize_results --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet #[0,1 or 2]
 ```
 
 ### Evaluation
