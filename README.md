@@ -17,8 +17,7 @@ Try our model easily on Colab : [![Open In Colab](https://colab.research.google.
 
 ### Change log:
 
-- Our method implementation using [LeReS][2] is now available. [July 2021]
-
+* Our method implementation using [LeReS][2] is now available. [July 2021]
 * A Quick overview of the method is now presented in README.md. [July 2021]
 * [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available.  [June 2021]   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/compphoto/BoostingMonocularDepth/blob/main/Boostmonoculardepth.ipynb)
 * Merge net training dataset generation [instructions](./dataset_prepare/mergenet_dataset_prepare.md) is now available. [June 2021] 
@@ -98,10 +97,10 @@ Step 3: Merge
 
 ## Setup
 
-We Provided the implementation of our method using [MiDas-v2][1], [LeReS][2] and [SGRnet][3] as the base.
+We Provided the implementation of our method using [MiDas-v2][1], [LeReS][2] and [SGRnet][3] as the base. Note that [MiDas-v2][1] and [SGRnet][3] estimate inverse depth while [LeReS][2] estimates depth. 
 
 ### Environments
-Our mergenet model is trained using torch 0.4.1 and python 3.6 and is tested with torch<=1.8.
+Our mergenet model is trained using torch 0.4.1 and python 3.7 and is tested with torch<=1.8.
 
 Download our mergenet model weights from [here](https://sfu.ca/~yagiz/CVPR21/latest_net_G.pth) and put it in 
 > .\pix2pix\checkpoints\mergemodel\latest_net_G.pth
@@ -122,7 +121,7 @@ activate the environment
 python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 0
 ```
 
-For LeReS, download the model weights from [LeReS][2] and put it in root:
+For LeReS, download the model weights from [LeReS][2] (Resnext101) and put it in root:
 > ./res101.pth
 
 ```sh
@@ -131,7 +130,7 @@ python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --dep
 ```
 
 To use [SGRnet][3] as base:
-Install dependancies as following:
+Install dependencies as following:
 ```sh
 conda install pytorch=0.4.1 cuda92 -c pytorch
 conda install torchvision
