@@ -7,7 +7,7 @@ Here is a visualization of the improvement gained using [LeRes][2] instead of [M
 
 
 
-# Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging 
+### Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging 
 
 > S. Mahdi H. Miangoleh\*, Sebastian Dille\*, Long Mai, Sylvain Paris, Yağız Aksoy.
 > [Main pdf](http://yaksoy.github.io/papers/CVPR21-HighResDepth.pdf),
