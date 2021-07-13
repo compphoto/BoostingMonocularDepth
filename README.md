@@ -1,7 +1,7 @@
 ### **(NEW!)** [LeRes][2] is now supported within our method.
 
 Here is a visualization of the improvement gained using [LeRes][2] instead of [MiDas][1].
-|RGB | Our method using [MiDaS][1] | Our method using [LeRes][2] (NEW!) |
+|RGB | Our method using [MiDaS][1] | Our method using [LeRes][2] (**NEW**!) |
 |----|------------|-----------|
 |![patchselection](./inputs/sample2.jpg)|![Patchexpand](./figures/sample2_midas.png)|![Patchexpand](./figures/sample2_leres.jpg)|
 
