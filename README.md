@@ -1,4 +1,14 @@
-## Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging 
+### **(NEW!)** [LeRes][2] is now supported within our method.
+
+Here is a visualization of the improvement gained using [LeRes][2] instead of [MiDas][1].
+|RGB | Our method using [MiDaS][1] | Our method using [LeRes][2] (NEW!) |
+|----|------------|-----------|
+|![patchselection](./inputs/sample2.jpg)|![Patchexpand](./figures/sample2_midas.png)|![Patchexpand](./figures/sample2_leres.jpg)|
+
+
+
+# Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging 
+
 > **Abstract**
 > Neural networks have shown great abilities in estimating depth from a single image. However, the inferred depth maps are well below one-megapixel resolution and often lack fine-grained details, which limits their practicality. Our method builds on our analysis on how the input resolution and the scene structure affects depth estimation performance. We demonstrate that there is a trade-off between a consistent scene structure and the high-frequency details, and merge low- and high-resolution estimations to take advantage of this duality using a simple depth merging network. We present a double estimation method that improves the whole-image depth estimation and a patch selection method that adds local details to the final result. We demonstrate that by merging estimations at different resolutions with changing context, we can generate multi-megapixel depth maps with a high level of detail using a pre-trained model.
 >
@@ -7,7 +17,9 @@
 > [Supplementary pdf](http://yaksoy.github.io/papers/CVPR21-HighResDepth-Supp.pdf),
 > [Project Page](http://yaksoy.github.io/highresdepth/).
 
-![Teaserimage](http://yaksoy.github.io/images/hrdepthTeaser.jpg)
+<p style="text-align:center;">
+<iframe  height="640" src="https://www.youtube.com/embed/lDeI17pHlqo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</p>
 
 We propose a method that can generate highly detailed high-resolution depth estimations from a single image. Our method is based on optimizing the performance of a pre-trained network by merging estimations in different resolutions and different patches to generate a high-resolution estimate. 
 
@@ -17,7 +29,7 @@ Try our model easily on Colab : [![Open In Colab](https://colab.research.google.
 
 ### Change log:
 
-* Our method implementation using [LeReS][2] is now available. [July 2021]
+* **(NEW!)** Our method implementation using [LeReS][2] is now available. [July 2021]
 * A Quick overview of the method is now presented in README.md. [July 2021]
 * [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available.  [June 2021]   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/compphoto/BoostingMonocularDepth/blob/main/Boostmonoculardepth.ipynb)
 * Merge net training dataset generation [instructions](./dataset_prepare/mergenet_dataset_prepare.md) is now available. [June 2021] 
@@ -83,7 +95,7 @@ We choose candidate patches by tiling the image and discarding all patches witho
 
 |Step 1: Tile and discard | Step 2: Expand | Step 3: Merge|
 |-------------------------|----------------|--------------|
-|![patchselection](./figures/patchselection.gif)|![Patchexpand](./figures/patchexpand.gif)|![Patchexpand](./figures/patchmerge.gif)| 
+|![patchselection](./figures/patchselection.gif)|![Patchexpand](./figures/patchexpand.gif)|![Patchexpand](./figures/patchmerge.gif)|
 
 ## Setup
 
