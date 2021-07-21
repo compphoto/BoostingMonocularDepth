@@ -4,7 +4,7 @@ from pix2pix.util import util
 import torch
 import pix2pix.models
 import pix2pix.data
-
+import numpy as np
 
 class BaseOptions():
     """This class defines options used during both training and test time.
@@ -71,6 +71,7 @@ class BaseOptions():
         parser.add_argument('--R20', action='store_true')
         parser.add_argument('--Final', action='store_true')
         parser.add_argument('--colorize_results', action='store_true')
+        parser.add_argument('--max_res', type=float, default=np.inf)
 
         self.initialized = True
         return parser

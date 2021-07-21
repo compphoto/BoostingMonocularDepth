@@ -7,6 +7,19 @@ Here is a visualization of the improvement gained using [LeRes][2] instead of [M
 
 
 
+### (NEW!) Maximum resolution can be set for a faster run time.
+
+Use **\--max_res** as input argument for run.py in combination with **--Final** to set a limit on the resolution of the results that our method generates.
+
+We provide this parameter as a trade-off between run-time and resolution. Using this reduces the run-time if only a result up to *specific-megapixel* is needed.
+
+This parameter sets a limit on the bigger dimension of the result in term of pixels (while keeping aspect ratio). For example, to generate results with a bigger dimension size up to 2000 pixels use the following:   
+
+```python
+python run.py --Final --max_res 2000 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 0
+```
+
+
 ### Boosting Monocular Depth Estimation Models to High-Resolution via Content-Adaptive Multi-Resolution Merging 
 
 > S. Mahdi H. Miangoleh\*, Sebastian Dille\*, Long Mai, Sylvain Paris, Yağız Aksoy.
@@ -24,6 +37,7 @@ Try our model easily on Colab : [![Open In Colab](https://colab.research.google.
 
 ### Change log:
 
+* (**NEW!**) Now you can set the maximum resolution of the results to reduce runtime.  
 * **(NEW!)** Our method implementation using [LeReS][2] is now available. [July 2021]
 * A Quick overview of the method is now presented in README.md. [July 2021]
 * [Google Colaboratory notebook](./Boostmonoculardepth.ipynb) is now available.  [June 2021]   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/compphoto/BoostingMonocularDepth/blob/main/Boostmonoculardepth.ipynb)
