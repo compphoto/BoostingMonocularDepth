@@ -151,19 +151,47 @@ def run(dataset, option):
         factor = max(min(1, 4 * patch_scale * whole_image_optimal_size / whole_size_threshold), 0.2)
         print('Adjust factor is:', 1/factor)
 
-        # Compute the target resolution.
+        # Check if Local boosting is beneficial.
+        if option.max_res < whole_image_optimal_size:
+            print("No Local boosting. Specified Max Res is smaller than R20")
+            path = os.path.join(result_dir, images.name)
+            if option.output_resolution == 1:
+                midas.utils.write_depth(path,
+                                        cv2.resize(whole_estimate,
+                                                   (input_resolution[1], input_resolution[0]),
+                                                   interpolation=cv2.INTER_CUBIC), bits=2,
+                                        colored=option.colorize_results)
+            else:
+                midas.utils.write_depth(path, whole_estimate, bits=2,
+                                        colored=option.colorize_results)
+            continue
+
+        # Compute the default target resolution.
         if img.shape[0] > img.shape[1]:
-            a = 2*whole_image_optimal_size
-            b = round(2*whole_image_optimal_size*img.shape[1]/img.shape[0])
+            a = 2 * whole_image_optimal_size
+            b = round(2 * whole_image_optimal_size * img.shape[1] / img.shape[0])
         else:
-            a = round(2*whole_image_optimal_size*img.shape[0]/img.shape[1])
-            b = 2*whole_image_optimal_size
+            a = round(2 * whole_image_optimal_size * img.shape[0] / img.shape[1])
+            b = 2 * whole_image_optimal_size
+        b = int(round(b / factor))
+        a = int(round(a / factor))
 
-        img = cv2.resize(img, (round(b/factor), round(a/factor)), interpolation=cv2.INTER_CUBIC)
+        # recompute a, b and saturate to max res.
+        if max(a,b) > option.max_res:
+            print('Default Res is higher than max-res: Reducing final resolution')
+            if img.shape[0] > img.shape[1]:
+                a = option.max_res
+                b = round(option.max_res * img.shape[1] / img.shape[0])
+            else:
+                a = round(option.max_res * img.shape[0] / img.shape[1])
+                b = option.max_res
+            b = int(b)
+            a = int(a)
 
-        base_size = option.net_receptive_field_size*2
+        img = cv2.resize(img, (b, a), interpolation=cv2.INTER_CUBIC)
 
         # Extract selected patches for local refinement
+        base_size = option.net_receptive_field_size*2
         patchset = generatepatchs(img, base_size)
 
         print('Target resolution: ', img.shape)
@@ -513,11 +541,12 @@ if __name__ == "__main__":
     parser.add_argument('--net_receptive_field_size', type=int, required=False)  # Do not set the value here
     parser.add_argument('--pix2pixsize', type=int, default=1024, required=False)  # Do not change it
     parser.add_argument('--depthNet', type=int, default=0, required=False,
-                        help='use to select different base depth networks 0:midas 1:strurturedRL')
+                        help='use to select different base depth networks 0:midas 1:strurturedRL 2:LeRes')
     parser.add_argument('--colorize_results', action='store_true')
     parser.add_argument('--R0', action='store_true')
     parser.add_argument('--R20', action='store_true')
     parser.add_argument('--Final', action='store_true')
+    parser.add_argument('--max_res', type=float, default=np.inf)
 
     # Check for required input
     option_, _ = parser.parse_known_args()
