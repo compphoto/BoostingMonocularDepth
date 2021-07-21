@@ -9,10 +9,14 @@ Here is a visualization of the improvement gained using [LeRes][2] instead of [M
 
 ### (NEW!) Maximum resolution can be set for a faster run time.
 
-Use **\--max_res** as input argument for run.py to set a limit on the resolution of the results that method generates. We provide this parameter as a trade-off between run-time and resolution. This way you can reduce run-time if you only need up to *specific-megapixel* depth maps.
+Use **\--max_res** as input argument for run.py in combination with **--Final** to set a limit on the resolution of the results that our method generates.
+
+We provide this parameter as a trade-off between run-time and resolution. This way you can reduce run-time if you only need up to *specific-megapixel* depth maps.
+
+This parameter sets a limit on the bigger dimension of the result in term of pixels (while keeping aspect ratio). For example if you want the results to be at most 2000 pixels in the bigger dimension use the following:   
 
 ```python
-python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 0 --max_res #[Integer] 
+python run.py --Final --max_res 2000 --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 0
 ```
 
 
