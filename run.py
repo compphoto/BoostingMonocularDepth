@@ -435,7 +435,7 @@ def estimatesrl(img, msize):
 
     # Forward pass
     input_img = torch.autograd.Variable(tensor_img.cuda().unsqueeze(0), volatile=True)
-    with torch.no_grad():
+    with torch.inference_mode():
         output = srlnet(input_img)
 
     # Normalization
@@ -470,7 +470,7 @@ def estimatemidas(img, msize):
     img_input = transform({"image": img})["image"]
 
     # Forward pass
-    with torch.no_grad():
+    with torch.inference_mode():
         sample = torch.from_numpy(img_input).to(device).unsqueeze(0)
         prediction = midasmodel.forward(sample)
 
@@ -516,7 +516,7 @@ def estimateleres(img, msize):
     img_torch = scale_torch(A_resize)[None, :, :, :]
 
     # Forward pass
-    with torch.no_grad():
+    with torch.inference_mode():
         prediction = leresmodel.inference(img_torch)
 
     prediction = prediction.squeeze().cpu().numpy()
