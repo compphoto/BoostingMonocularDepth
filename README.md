@@ -1,6 +1,6 @@
 ### **(NEW!)** [Boost Your Own depth](https://github.com/compphoto/BoostYourOwnDepth) with our new repo
 
-In this new repository, we present a stand-alone implementation of our merging operator. This new repo helps artist better manipulate generated depth maps to fit their needs and also is usefull for scientist developing CNN-based MDE to apply our boosting method to their work. For more details please take a look at [here](https://github.com/compphoto/BoostYourOwnDepth).
+We present a stand-alone implementation of our [Merging Operator](#method). This new repo allows using any pair of monocular depth estimations in our double estimation. This includes using separate networks for base and high-res estimations, using networks not supported by this repo (such as Midas v3), or using manually edited depth maps for artistic use. This will also be useful for scientists developing CNN-based MDE as a way to quickly apply double estimation to their own network. For more details please take a look at [here](https://github.com/compphoto/BoostYourOwnDepth).
 
 ### **(NEW!)** [LeRes][2] is now supported within our method.
 
