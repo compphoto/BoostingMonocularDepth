@@ -1,6 +1,6 @@
 ### **(NEW!)** [Boost Your Own depth](https://github.com/compphoto/BoostYourOwnDepth) with our new repo
 
-We present a stand-alone implementation of our [Merging Operator](#method). This new repo allows using any pair of monocular depth estimations in our double estimation. This includes using separate networks for base and high-res estimations, using networks not supported by this repo (such as [Midas-v3](https://github.com/isl-org/MiDaS)), or using manually edited depth maps for artistic use. This will also be useful for scientists developing CNN-based MDE as a way to quickly apply double estimation to their own network. For more details please take a look at [here](https://github.com/compphoto/BoostYourOwnDepth).
+We present a stand-alone implementation of our [Merging Operator](#method). This new repo allows using any pair of monocular depth estimations in our double estimation. This includes using separate networks for base and high-res estimations, using networks not supported by this repo (such as [Midas-v3](https://github.com/isl-org/MiDaS)), or using manually edited depth maps for artistic use. This will also be useful for scientists developing CNN-based MDE as a way to quickly apply double estimation to their own network. For more details please take a look [here](https://github.com/compphoto/BoostYourOwnDepth).
 
 | Input | Original result | After manual editing of base|
 |----|------------|------------|
