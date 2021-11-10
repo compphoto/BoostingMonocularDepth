@@ -1,6 +1,6 @@
 ## Merge net training dataset preparation
 ### Download the datasets
-Download rgb images of Ibims1-core-raw from [Ibims1 official webpage](https://www.bgu.tum.de/en/lmf/research/datasets/ibims-1/).
+Download rgb images of Ibims1-core-raw from [Ibims1 official webpage](https://www.asg.ed.tum.de/lmf/ibims1/).
 
 Download rgb images of Middleburry2014 "10 evaluation training sets with GT" + "13 additional datasets with GT
 " from [Middleburry-2014 official webpage](https://vision.middlebury.edu/stereo/data/scenes2014/) . 
