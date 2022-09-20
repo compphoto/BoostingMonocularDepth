@@ -1,4 +1,4 @@
-### **(NEW!)** My thesis provides a thorough explanation of this work. Checkout my [**video presenation**](https://youtu.be/DZ0ft1l50KY)!
+### **(NEW!)** My thesis provides a thorough explanation of this work. Checkout my [video presenation](https://youtu.be/DZ0ft1l50KY)!
 
 I recently graduated from the Master's program from Simon Fraser University. My thesis is on "Boosting Monocular Depth Estimation to High Resolution" which includes **a more detailed explanation of our paper**. Checkout the thesis webpage [here](http://yaksoy.github.io/bmd-msc/). 
 
