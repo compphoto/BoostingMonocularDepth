@@ -147,7 +147,9 @@ python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --dep
 
 For LeReS, download the model weights from [LeReS][2] (Resnext101) and put it in root:
 > ./res101.pth
-*** (Feb 2024): Model links on the LeReS website are expired. You can download their model links from their HuggingFace page from [here](https://huggingface.co/lllyasviel/Annotators/resolve/850be791e8f704b2fa2e55ec9cc33a6ae3e28832/res101.pth) instead.   
+
+*** (Feb 2024): Model weight link on the LeReS website is expired. You can download it from their [HuggingFace demo](https://huggingface.co/lllyasviel/Annotators/resolve/850be791e8f704b2fa2e55ec9cc33a6ae3e28832/res101.pth) instead.   
+
 ```sh
 activate the environment
 python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --depthNet 2
