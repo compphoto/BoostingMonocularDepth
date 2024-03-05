@@ -206,7 +206,10 @@ class ImageDataset:
         self.dataset_dir = root_dir
         self.subsetname = subsetname
         self.rgb_image_dir = root_dir
-        self.files = sorted(os.listdir(self.rgb_image_dir))
+        # fixing error caused by unsupported or hidden files in the same folder as of the input folder
+        # self.files = sorted(os.listdir(self.rgb_image_dir))
+        allowed_image_formats = ['.png', '.jpg', '.jpeg']
+        self.files = sorted([f for f in os.listdir(self.rgb_image_dir) if any(f.endswith(format) for format in allowed_image_formats)])
 
     def __len__(self):
         return len(self.files)
