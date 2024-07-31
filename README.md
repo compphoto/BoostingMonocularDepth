@@ -1,6 +1,6 @@
 ### **(NEW!)** My thesis provides a thorough explanation of this work. Checkout my [video presenation](https://youtu.be/DZ0ft1l50KY)!
 
-I recently graduated from the Master's program from Simon Fraser University. My thesis is on "Boosting Monocular Depth Estimation to High Resolution" which includes **a more detailed explanation of our paper**. Checkout the thesis webpage [here](http://yaksoy.github.io/bmd-msc/). 
+I recently graduated from the Computing Science Master's Program at Simon Fraser University. My thesis is on "Boosting Monocular Depth Estimation to High Resolution" which includes **a more detailed explanation of our paper**. Checkout the thesis webpage [here](http://yaksoy.github.io/bmd-msc/). 
 
 ### **(NEW!)** [Boost Your Own depth](https://github.com/compphoto/BoostYourOwnDepth) with our new repo
 
@@ -147,6 +147,8 @@ python run.py --Final --data_dir PATH_TO_INPUT --output_dir PATH_TO_RESULT --dep
 
 For LeReS, download the model weights from [LeReS][2] (Resnext101) and put it in root:
 > ./res101.pth
+
+*** (Feb 2024): Model weight link on the LeReS website is expired. You can download it from their [HuggingFace demo](https://huggingface.co/lllyasviel/Annotators/resolve/850be791e8f704b2fa2e55ec9cc33a6ae3e28832/res101.pth) instead.   
 
 ```sh
 activate the environment
