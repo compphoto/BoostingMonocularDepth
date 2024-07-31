@@ -1,7 +1,7 @@
 ### **(NEW!)** We released our recent work on SI-depth estimation published at SIGGRAPH 2024, Checkout the [project webpage](https://yaksoy.github.io/sidepth/)!
 In our recent publication "Scale-Invariant Monocular Depth Estimation via SSI Depth" we estimate Scale-Invariant (SI) depth. SI-invariant depth provides a goemetrical depth representation that can projected to 3D without distortions.
 
-We also introduce a new Scale and Shift-invariant depth model that generates significant ammount of details compared to state of the art methods.
+We also introduce a new scale and shift-invariant depth model that although not geometric, generates significant amount of details compared to very recent state of the art.
 
 Checkout our new [project](https://yaksoy.github.io/sidepth/) and its [implementation](https://github.com/compphoto/sidepth).
 
