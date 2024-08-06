@@ -1,8 +1,16 @@
-### **(NEW!)** My thesis provides a thorough explanation of this work. Checkout my [video presenation](https://youtu.be/DZ0ft1l50KY)!
+### **(NEW!)** We released our recent work on SI-depth estimation published at SIGGRAPH 2024, Checkout the [project webpage](https://yaksoy.github.io/sidepth/)!
+In our recent publication "Scale-Invariant Monocular Depth Estimation via SSI Depth" we estimate Scale-Invariant (SI) depth. SI-invariant depth provides a goemetrical depth representation that can projected to 3D without distortions.
+
+We also introduce a new scale and shift-invariant depth model that although not geometric, generates significant amount of details compared to very recent state of the art.
+
+Checkout our new [project](https://yaksoy.github.io/sidepth/) and its [implementation](https://github.com/compphoto/sidepth).
+
+
+### My thesis provides a thorough explanation of this work. Checkout my [video presenation](https://youtu.be/DZ0ft1l50KY)!
 
 I recently graduated from the Computing Science Master's Program at Simon Fraser University. My thesis is on "Boosting Monocular Depth Estimation to High Resolution" which includes **a more detailed explanation of our paper**. Checkout the thesis webpage [here](http://yaksoy.github.io/bmd-msc/). 
 
-### **(NEW!)** [Boost Your Own depth](https://github.com/compphoto/BoostYourOwnDepth) with our new repo
+### [Boost Your Own depth](https://github.com/compphoto/BoostYourOwnDepth) with our new repo
 
 We present a stand-alone implementation of our [Merging Operator](#method). This new repo allows using any pair of monocular depth estimations in our double estimation. This includes using separate networks for base and high-res estimations, using networks not supported by this repo (such as [Midas-v3](https://github.com/isl-org/MiDaS)), or using manually edited depth maps for artistic use. This will also be useful for scientists developing CNN-based MDE as a way to quickly apply double estimation to their own network. For more details please take a look [here](https://github.com/compphoto/BoostYourOwnDepth).
 
@@ -11,7 +19,7 @@ We present a stand-alone implementation of our [Merging Operator](#method). This
 |![patchselection](./figures/lunch_rgb.jpg)|![patchselection](./figures/lunch_orig.png)|![patchselection](./figures/lunch_edited.png)|
 
 
-### **(NEW!)** [LeRes][2] is now supported within our method.
+### [LeRes][2] is now supported within our method.
 
 Here is a visualization of the improvement gained using [LeRes][2] instead of [MiDas][1].
 |RGB | Our method using [MiDaS][1] | Our method using [LeRes][2] (**NEW**!) |
@@ -20,7 +28,7 @@ Here is a visualization of the improvement gained using [LeRes][2] instead of [M
 
 
 
-### (NEW!) Maximum resolution can be set for a faster run time.
+### Maximum resolution can be set for a faster run time.
 
 Use **\--max_res** as input argument for run.py in combination with **--Final** to set a limit on the resolution of the results that our method generates.
 
